@@ -1,3 +1,4 @@
+import random
 from django.db import models
 from datetime import datetime, timedelta
 from django.contrib.auth.models import User
@@ -178,8 +179,7 @@ class Service(models.Model):
 
 class Commande(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
-    # diwedatenow // YYMM000001randomD
-    reference = models.CharField(max_length=50, blank=True, unique=True)
+    reference = models.CharField(max_length=50, blank=True, null=True)
     tel1 = models.CharField(max_length=50, blank=True, null=False)
     tel2 = models.CharField(max_length=50, blank=True, null=True)
     segment = models.CharField(
@@ -195,15 +195,9 @@ class Commande(models.Model):
         max_length=20, choices=LISTE_DEVISE, blank=True, null=False)
     _id = models.AutoField(primary_key=True, editable=False)
 
-    def save(self, *args, **kwargs):
-        if not self.pk: # à completer 
-            self.reference == "diwe4752"
-        
-        super().save(*args, **kwargs)  
 
-    def __str__(self):
-        return self.reference
-    
+    # def __str__(self):
+    #     return self.reference
 
 
 class DetailCommande(models.Model):

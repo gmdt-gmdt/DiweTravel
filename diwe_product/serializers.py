@@ -114,7 +114,7 @@ class CommandeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Commande
-        fields = ('user', 'reference', 'tel1',
+        fields = ('user', 'tel1',
                   'tel2', 'segment', 'pays', 'ville', 'code_postal', 'rue', 'numero_rue', 'commande_date', 'devise')
 
 

@@ -842,7 +842,7 @@ def createDiweCommande(request):
     try:
         commandes = Commande.objects.create(
             user=user,
-            reference=data['reference'],
+            #reference=data['reference'],
             tel1=data["tel1"],
             tel2=data["tel2"],
             segment=data["segment"],
