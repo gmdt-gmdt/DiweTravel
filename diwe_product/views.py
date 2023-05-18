@@ -8,13 +8,13 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from datetime import datetime, timedelta
 
 from diwe_product.models import (
-    Image, Sequence, DiweRoute, DiweCategory,
+    Accueil, Image, Sequence, DiweRoute, DiweCategory,
     DiweRegion, Site, ContactSite, Distance,
     Ville, Commande, DetailCommande, Participant, Pays,
     TypeService, Package, Service, Schedule
 )
 from diwe_product.serializers import (
-    ImageSerializer, SiteSerializer, ContactSiteSerializer,
+    AccueilSerializer, ImageSerializer, SiteSerializer, ContactSiteSerializer,
     DistanceSerializer, SequenceSerializer, DiweRouteSerializer, DiweRegionSerializer,
     DiweCategorySerializer, VilleSerializer, CommandeSerializer,
     DetailCommandeSerializer, PaysSerializer, ScheduleSerializer,
@@ -1008,3 +1008,61 @@ def deleteParticipant(request, pk):
     participant = Participant.objects.get(_id=pk)
     participant.delete()
     return Response('Participant Deleted')
+
+
+@api_view(['GET'])
+def getAccueil(request): 
+    accueil = Accueil.objects.all()
+    serializer = AccueilSerializer(accueil, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def createAccueil(request):
+    data = request.data
+    try:
+        accueil = Accueil.objects.create(
+            tel1=data['tel1'],
+            tel2=data['tel2'],
+            mail=data['mail'],
+            image=data['image'],
+            image1=data['image1'],
+            image2=data['image2'],
+            description=data['description'],
+        )
+        serializer = AccueilSerializer(accueil, many=False)
+        return Response(serializer.data)
+    except:
+        message = {'detail': 'Thanks !'}
+        return Response(message, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def updateAccueil(request, pk):
+    accueil = Accueil.objects.get(_id=pk)
+
+    data = request.data
+
+    accueil.tel1=data['tel1']
+    accueil.tel2=data['tel2']
+    accueil.mail=data['mail']
+    accueil.image=data['image']
+    accueil.image1=data['image1']
+    accueil.image2=data['image2']
+    accueil.description=data['description']
+
+    accueil.save()
+
+    serializer = AccueilSerializer(accueil, many=False)
+
+    return Response(serializer.data)
+
+
+@api_view(['DELETE'])
+@permission_classes([IsAdminUser])
+def deleteAccueil(request, pk):
+    accueil = Participant.objects.get(_id=pk)
+    accueil.delete()
+    return Response('Accueil Deleted')

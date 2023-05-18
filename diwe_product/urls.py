@@ -179,4 +179,15 @@ urlpatterns = [
     path('delete-participant/<str:pk>/',
          views.deleteParticipant, name="participant_delete"),
 
+     path('accueil/', views.getAccueil, name="accueil"),
+
+    path('create-accueil/', views.createAccueil,
+         name="create_accueil"),
+
+    path('update-accueil/<str:pk>/',
+         views.updateAccueil, name="update_accueil"),
+
+    path('delete-accueil/<str:pk>/',
+         views.deleteAccueil, name="accueil_delete"),
+
 ]
