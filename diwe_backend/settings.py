@@ -252,7 +252,7 @@ ROOT_URLCONF = 'diwe_backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'DIWE/public')],
+        'DIRS': [os.path.join(BASE_DIR, 'diwe_frontend/public')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -309,12 +309,12 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'diwe_product/static')
+    os.path.join(BASE_DIR, 'diwe_frontend/static')
 ]
 
 # Media folder settings
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/diwe_frontend/public/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'diwe_frontend/public/media')
 
 
 CORS_ALLOW_ALL_ORIGINS = True

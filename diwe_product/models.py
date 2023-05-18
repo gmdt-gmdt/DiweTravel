@@ -146,8 +146,8 @@ class Image(models.Model):
     description = models.TextField()
     package = models.ForeignKey(
         'Package', on_delete=models.DO_NOTHING)
-    image = models.ImageField(upload_to="static/media/img/", null=True, blank=True)
-    video = models.FileField(upload_to='static/media/video/', blank=True, null=True)
+    image = models.ImageField(upload_to="static/images/", null=True, blank=True)
+    video = models.FileField(upload_to='static/videos/', blank=True, null=True)
     vitrine = models.BooleanField()
     _id = models.AutoField(primary_key=True, editable=False)
 
